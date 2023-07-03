@@ -619,6 +619,11 @@ class HermesApp(HermesClient):
         finally:
             self.mqtt_client.loop_stop()
 
+    def stop(self):
+            """Stop incoming message processing, so asyncio.run completes."""
+            self.stop_messages()
+            self.mqtt_client.disconnect()
+
     def notify(self, text: str, site_id: str = "default"):
         """Send a dialogue notification.
 
